@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <!-- 主背景色值：APP所有页面默认背景色，以及分割线颜色 -->
+    <color name="background_color">#F6F7FA</color>
+    <!-- 主要功能底色：页面布局、卡片、画布-->
+    <color name="primary_background_color">#FFFFFF</color>
+    <color name="popup_window_background_color">#A0000000</color>
+    <!-- 突出强调的字体颜色 -->
+    <color name="accent_text_color">#2D3342</color>
+    <!-- 标题文字颜色 -->
+    <color name="title_text_color">#67778B</color>
+    <color name="title_text_color_alpha80">#3367778B</color>
+    <!-- 页面辅助文字颜色 -->
+    <color name="minor_text_color">#A1AAB6</color>
+    <color name="minor2_text_color">#929DA6</color>
+    <!-- 50%透明页面辅助文字颜色 -->
+    <color name="minor_text_color_alpha50">#80A1AAB6</color>
+    <!-- 分隔线 -->
+    <color name="background_split_color">#D3D9E0</color>
+    <color name="primary_background_split_color">#E5E9EF</color>
+    <color name="primary_background_split_color_alpha70">#B3E5E9EF</color>
+    <color name="dialog_split_color">#E5E9EF</color>
+    <!-- APP主色：启动图标，选中项，主导航，切换菜单Tab-->
+    <color name="accent_color">#FB903F</color>
+    <color name="accent_color_alpha50">#80FB903F</color>
+    <color name="accent_color_alpha30">#4DFB903F</color>
+    <!-- 不透明度14 -->
+    <color name="accent_color_alpha86">#24FB903F</color>
+    <!-- 不透明度22 -->
+    <color name="accent_color_alpha78">#38FB903F</color>
+
+    <!-- 不透明度10 -->
+    <color name="accent_color_alpha90">#1AFB903F</color>
+    <!--悬浮窗背景-->
+    <color name="float_bg_color">#b3f6f7fa</color>
+    <color name="float_stock_color">#FFD3D9E0</color>
+    <color name="float_stock_gray">#4d000f1a</color>
+    <color name="label_normal_color">#4DA1AAB6</color>
+    <color name="label_select_color">#1A30ABF5</color>
+</resources>

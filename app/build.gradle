@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "26.0.2"
+
+    defaultConfig {
+        applicationId "com.tiandao.geniusdoctor"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 100000
+        versionName "1.0.0.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    dexOptions {
+        //incremental true
+        // 对于dex 的--multi-dex 选项设置与预编译的library工程有冲突,因此如果你的应用中包含引用的lirary工程,需要将预编译设置为false
+        //否则会抛出com.android.dex.DexException: Library dex files are not supported in multi-dex mode异常
+        preDexLibraries = false
+        //设置虚拟机堆内存空间大小，避免在编译期间OOM
+        javaMaxHeapSize "2g"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    testImplementation 'junit:junit:4.12'
+}
