@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.AddRecordActivity" />
+        <activity
+            android:name=".view.AddRecordActivity"
+            android:theme="@style/AppTheme.Base" />
     </application>
 
 </manifest>

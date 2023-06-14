@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddRecordActivity.class);
                 intent.putExtra(TransferConstants.TableName, Department.TABLE_NAME);
-                intent.putExtra(TransferConstants.recordId, -1);
+                intent.putExtra(TransferConstants.recordId, 1);
                 startActivity(intent);
             }
         });

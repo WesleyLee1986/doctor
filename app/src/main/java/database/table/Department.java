@@ -30,12 +30,16 @@ public class Department implements Table, IData {
     private String name;
     private String remark;
     private Map<String, String> customerFields;
-    private static List<TableColumnDef> originFieldInfos = new ArrayList<>();
-    private static TreeSet<TableColumnDef> customerFieldInfos = null;//标识字段顺序
+    private static List<TableColumnDef> originFieldInfos = null;//原始字段
+    private static TreeSet<TableColumnDef> customerFieldInfos = null;//客户自定义字段
 
     public Department() {
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_NAME, DBConstants.DATA_TYPE_TEXT, "科室名称"));
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_REMARK, DBConstants.DATA_TYPE_TEXT, "备注"));
+        if(null == originFieldInfos) {
+            originFieldInfos = new ArrayList<>();
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_NAME, DBConstants.DATA_TYPE_TEXT, "科室名称"));
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_REMARK, DBConstants.DATA_TYPE_TEXT, "备注"));
+        }
+
         if (null == customerFieldInfos) {
             customerFieldInfos = new TreeSet<>(new Comparator<TableColumnDef>() {
                 @Override

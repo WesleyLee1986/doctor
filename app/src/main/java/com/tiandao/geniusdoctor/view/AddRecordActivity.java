@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.tiandao.geniusdoctor.R;
 
+import java.util.List;
+
+import database.DatabaseManager;
 import database.model.TransferConstants;
 import database.table.Department;
 import database.table.Doctor;
@@ -26,6 +29,7 @@ public class AddRecordActivity extends AppCompatActivity {
     private String tableName;
     private int recordId;
     private Table table;
+    private LinearLayout llFields;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,12 +50,31 @@ public class AddRecordActivity extends AppCompatActivity {
             btnSave.setText("保存");
         }
 
-        LinearLayout llFields = findViewById(R.id.ll_fields);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = llFields.getChildCount();
+                for(int i=0;i<count;i++){
+                    View child = llFields.getChildAt(i);
+                    if(child instanceof EditText){
+                        table.setFieldValue((String) child.getTag(),((EditText) child).getText().toString());
+                    }
+                }
+                table.saveToDatabase();
+                finish();
+            }
+        });
+
+        llFields = findViewById(R.id.ll_fields);
         for (TableColumnDef tableColumnDef : table.getColumnDef()) {
             EditText editText = new EditText(this);
+            editText.setTag(tableColumnDef.getColumn_name());
             editText.setHint(tableColumnDef.getColumn_desc());
             editText.setInputType(InputType.TYPE_CLASS_TEXT);
             editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18.0f);
+            if(recordId > 0){
+                editText.setText(table.getFieldValue(tableColumnDef.getColumn_name()));
+            }
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(0, dp2px(6.0f), 0, 0);
             llFields.addView(editText);
@@ -61,10 +84,28 @@ public class AddRecordActivity extends AppCompatActivity {
     private Table getTable() {
         switch (tableName) {
             case Hospital.TABLE_NAME:
+                if(recordId > 0){
+                    List<Hospital> hospitals = DatabaseManager.getInstance().getHospital(recordId);
+                    if(hospitals.size() > 0) {
+                        return hospitals.get(0);
+                    }
+                }
                 return new Hospital();
             case Department.TABLE_NAME:
+                if(recordId > 0){
+                    List<Department> departments = DatabaseManager.getInstance().getDepartment(recordId);
+                    if(departments.size() > 0) {
+                        return departments.get(0);
+                    }
+                }
                 return new Department();
             case Doctor.TABLE_NAME:
+                if(recordId > 0){
+                    List<Doctor> doctors = DatabaseManager.getInstance().getDoctor(recordId);
+                    if(doctors.size() > 0) {
+                        return doctors.get(0);
+                    }
+                }
                 return new Doctor();
         }
 

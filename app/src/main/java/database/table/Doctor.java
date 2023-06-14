@@ -40,15 +40,18 @@ public class Doctor implements Table, IData {
     private int visit_date;
     private String remark;
     private Map<String, String> customerFields;
-    private static List<TableColumnDef> originFieldInfos = new ArrayList<>();
+    private static List<TableColumnDef> originFieldInfos = null;
     private static TreeSet<TableColumnDef> customerFieldInfos = null;//标识字段顺序
 
     public Doctor() {
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_NAME, DBConstants.DATA_TYPE_TEXT, "医生名称"));
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_DEPARTMENT, DBConstants.DATA_TYPE_TEXT, "科室"));
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_HOSPITAL, DBConstants.DATA_TYPE_TEXT, "所在医院"));
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_VISIT_DATE, DBConstants.DATA_TYPE_TEXT, "出诊日期"));
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_REMARK, DBConstants.DATA_TYPE_TEXT, "备注"));
+        if(null == originFieldInfos) {
+            originFieldInfos = new ArrayList<>();
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_NAME, DBConstants.DATA_TYPE_TEXT, "医生名称"));
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_DEPARTMENT, DBConstants.DATA_TYPE_TEXT, "科室"));
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_HOSPITAL, DBConstants.DATA_TYPE_TEXT, "所在医院"));
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_VISIT_DATE, DBConstants.DATA_TYPE_TEXT, "出诊日期"));
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_REMARK, DBConstants.DATA_TYPE_TEXT, "备注"));
+        }
         if (null == customerFieldInfos) {
             customerFieldInfos = new TreeSet<>(new Comparator<TableColumnDef>() {
                 @Override

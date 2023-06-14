@@ -38,15 +38,18 @@ public class Hospital implements Table, IData {
     private String type;
     private String remark;
     private Map<String, String> customerFields;
-    private static List<TableColumnDef> originFieldInfos = new ArrayList<>();
+    private static List<TableColumnDef> originFieldInfos = null;
     private static TreeSet<TableColumnDef> customerFieldInfos = null;//自定义字段
 
     public Hospital() {
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_NAME, DBConstants.DATA_TYPE_TEXT, "医院名称"));
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_ADDRESS, DBConstants.DATA_TYPE_TEXT, "医院地址"));
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_REGION, DBConstants.DATA_TYPE_TEXT, "区域"));
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_TYPE, DBConstants.DATA_TYPE_TEXT, "医院类别(私立or公里)"));
-        originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_REMARK, DBConstants.DATA_TYPE_TEXT, "备注"));
+        if(null == originFieldInfos) {
+            originFieldInfos = new ArrayList<>();
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_NAME, DBConstants.DATA_TYPE_TEXT, "医院名称"));
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_ADDRESS, DBConstants.DATA_TYPE_TEXT, "医院地址"));
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_REGION, DBConstants.DATA_TYPE_TEXT, "区域"));
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_TYPE, DBConstants.DATA_TYPE_TEXT, "医院类别(私立or公里)"));
+            originFieldInfos.add(new TableColumnDef(TABLE_NAME, COLUMN_REMARK, DBConstants.DATA_TYPE_TEXT, "备注"));
+        }
         if (null == customerFieldInfos) {
             customerFieldInfos = new TreeSet<>(new Comparator<TableColumnDef>() {
                 @Override
