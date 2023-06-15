@@ -1,0 +1,25 @@
+
+# Android Studio / Gradle build files
+.idea
+.gradle
+build
+#gradle
+#gradlew
+gradlew.bat
+local.properties
+**/*.iml
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+.project
+apk
+
+### Calbash ###
+.irb-history
+test_servers/
+screenshot_*.png
+
+### other ###
+captures/
