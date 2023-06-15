@@ -1,17 +1,24 @@
 package com.tiandao.geniusdoctor.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 
 import com.tiandao.geniusdoctor.R;
 
@@ -75,6 +82,11 @@ public class AddRecordActivity extends AppCompatActivity {
             if(recordId > 0){
                 editText.setText(table.getFieldValue(tableColumnDef.getColumn_name()));
             }
+            if(null != tableColumnDef.getRelated_table_name() && !"".equals(tableColumnDef.getRelated_table_name())){
+                RecommendPopupWindow popupWindow = new RecommendPopupWindow(this);
+                popupWindow.bindView(editText,tableColumnDef);
+            }
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(0, dp2px(6.0f), 0, 0);
             llFields.addView(editText);
@@ -125,5 +137,10 @@ public class AddRecordActivity extends AppCompatActivity {
         tableName = intent.getStringExtra(TransferConstants.TableName);
         recordId = intent.getIntExtra(TransferConstants.recordId, -1);
         table = getTable();
+    }
+
+    private PopupWindow popupWindow;
+    private void initRecommendView(Context context){
+
     }
 }

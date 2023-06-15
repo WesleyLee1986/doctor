@@ -24,8 +24,11 @@ public class TableColumnDef {
     //字段描述
     public static final String COLUMN_DESC = "column_desc";
 
+    public static final String COLUMN_RELATED_TABLE_NAME = "related_table_name";
+
     private int id;
     private String table_name;
+    private String related_table_name;
     private String column_name;
     private String column_type;
     private String column_desc;
@@ -35,8 +38,13 @@ public class TableColumnDef {
     }
 
     public TableColumnDef(String table_name, String column_name, String column_type, String column_desc) {
+        this(table_name, column_name, null, column_type, column_desc);
+    }
+
+    public TableColumnDef(String table_name, String column_name, String related_table_name, String column_type, String column_desc) {
         this.table_name = table_name;
         this.column_name = column_name;
+        this.related_table_name = related_table_name;
         this.column_type = column_type;
         this.column_desc = column_desc;
     }
@@ -48,6 +56,7 @@ public class TableColumnDef {
                 "(" +
                 COLUMN_ID + " " + DBConstants.DATA_TYPE_INTEGER + " PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_TABLE_NAME + " " + DBConstants.DATA_TYPE_TEXT + " NOT NULL," +
+                COLUMN_TABLE_NAME + " " + DBConstants.DATA_TYPE_TEXT + "," +
                 COLUMN_COL_NAME + " " + DBConstants.DATA_TYPE_TEXT + " NOT NULL," +
                 COLUMN_TYPE + " " + DBConstants.DATA_TYPE_TEXT + " NOT NULL," +
                 COLUMN_DESC + " " + DBConstants.DATA_TYPE_TEXT +
@@ -70,6 +79,9 @@ public class TableColumnDef {
                 case COLUMN_TABLE_NAME:
                     tableUpdate.setTable_name(cursor.getString(i));
                     break;
+                case COLUMN_RELATED_TABLE_NAME:
+                    tableUpdate.setRelated_table_name(cursor.getString(i));
+                    break;
                 case COLUMN_COL_NAME:
                     tableUpdate.setColumn_name(cursor.getString(i));
                     break;
@@ -89,6 +101,7 @@ public class TableColumnDef {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_TABLE_NAME, getTable_name());
         contentValues.put(COLUMN_COL_NAME, getColumn_name());
+        contentValues.put(COLUMN_RELATED_TABLE_NAME, getRelated_table_name());
         contentValues.put(COLUMN_TYPE, getColumn_type());
         contentValues.put(COLUMN_DESC, getColumn_desc());
         return contentValues;

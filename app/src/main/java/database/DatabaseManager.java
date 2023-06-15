@@ -221,6 +221,38 @@ public class DatabaseManager {
         return departments;
     }
 
+    public List<IData> getRecord(String tableName,String nameVal){
+        List<IData> dataList = new ArrayList<>();
+        SQLiteDatabase database = null;
+        Cursor cursor = null;
+        try {
+            database = openHelper.getWritableDatabase();
+            String sql = "select * from " + tableName;
+            String where = "";
+            if (null != nameVal && !"".equals(nameVal)) {
+                where = " where name LIKE '%" + nameVal + "%'";
+            }
+            cursor = database.rawQuery(sql + where, null);
+            while (null != cursor && cursor.moveToNext()) {
+                if(Doctor.TABLE_NAME.equals(tableName)) {
+                    dataList.add(Doctor.parse(cursor));
+                } else if(Hospital.TABLE_NAME.equals(tableName)){
+                    dataList.add(Hospital.parse(cursor));
+                } else if(Department.TABLE_NAME.equals(tableName)){
+                    dataList.add(Department.parse(cursor));
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return dataList;
+    }
+
     public List<Doctor> getDoctor(int id) {
         List<Doctor> doctors = new ArrayList<>();
         SQLiteDatabase database = null;
